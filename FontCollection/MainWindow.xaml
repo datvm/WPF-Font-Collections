@@ -1,0 +1,59 @@
+﻿<Window x:Class="FontCollection.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FontCollection"
+        mc:Ignorable="d"
+        Title="Font Collections &#169; DatVM" WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Collections">
+                <MenuItem Header="Add New" Name="mnuAddCollection" Click="mnuAddCollection_Click" />
+                <MenuItem Header="Delete" Name="mnuRemoveCollection" Click="mnuRemoveCollection_Click" />
+            </MenuItem>
+        </Menu>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ComboBox Name="cboCollections" ItemsSource="{Binding FontCollectionsUI}" SelectionChanged="cboCollections_SelectionChanged" />
+            <ListView Grid.Row="1" Name="lstFonts" ItemsSource="{Binding FilteredFontList}" SelectionChanged="lstFonts_SelectionChanged"></ListView>
+
+            <Grid Grid.Column="1" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Name="lblPreview" Text="Tôi có thể ăn thủy tinh mà không hại gì." TextAlignment="Center"
+                           FontSize="24" TextWrapping="WrapWithOverflow" FontFamily="Segoe UI Light" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           />
+
+                <ListBox ItemsSource="{Binding CurrentFontBinding}" Grid.Row="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="{Binding CollectionName}" IsChecked="{Binding Binded}" Checked="chkFontCollectionBinding_Checked" Unchecked="chkFontCollectionBinding_Checked" Tag="{Binding CollectionAndFamilyName}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+            </Grid>
+
+        </Grid>
+    </DockPanel>
+
+
+
+
+</Window>
